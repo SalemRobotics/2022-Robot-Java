@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -16,9 +17,10 @@ public class Climber extends SubsystemBase {
     public Climber() {
         motorA = new WPI_TalonSRX(ClimberConstants.kMotorAPort);
         motorB = new WPI_TalonSRX(ClimberConstants.kMotorBPort);
-        solenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, ClimberConstants.kForwardChannel, ClimberConstants.kReverseChannel);
-
         motorB.follow(motorA);
+        motorB.setInverted(InvertType.OpposeMaster);
+
+        solenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, ClimberConstants.kForwardChannel, ClimberConstants.kReverseChannel);
     }
 
     /** Sets TalonSRX motor speed.
@@ -26,6 +28,8 @@ public class Climber extends SubsystemBase {
     public void climb(double speed) {
         motorA.set(TalonSRXControlMode.PercentOutput, speed);
     }
+
+    //TODO: Make climbDown function that takes account of voltage.
 
     // Toggles pneumatic brake for climber.
     public void brake() {
