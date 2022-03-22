@@ -21,14 +21,18 @@ public class Climber extends SubsystemBase {
         motorB.follow(motorA);
     }
 
+    /** Sets TalonSRX motor speed.
+     * @param speed speed motor will run at */
     public void climb(double speed) {
         motorA.set(TalonSRXControlMode.PercentOutput, speed);
     }
 
+    // Toggles pneumatic brake for climber.
     public void brake() {
         solenoid.toggle();
     }
 
+    // Stops all motors.
     public void halt() {
         motorA.set(TalonSRXControlMode.PercentOutput, 0.0);
     }
