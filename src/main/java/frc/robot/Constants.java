@@ -13,4 +13,11 @@ public final class Constants {
         public static final int drivePort = 0;
         public static final int opPort = 1;
     }
+
+    public final class ClimberConstants {
+        public static final int kMotorAPort = 6;
+        public static final int kMotorBPort = 7;
+        public static final int kForwardChannel = 1;
+        public static final int kReverseChannel = 2;
+    }
 }
