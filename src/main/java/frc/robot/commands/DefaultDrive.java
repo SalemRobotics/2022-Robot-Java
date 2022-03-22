@@ -9,6 +9,7 @@ public class DefaultDrive extends CommandBase {
   private final DoubleSupplier forward;
   private final DoubleSupplier rotation;
 
+  // Command to set arcade drive
   public DefaultDrive(Drivetrain subsystem, DoubleSupplier fwd, DoubleSupplier rot) {
     drive = subsystem;
     forward = fwd;

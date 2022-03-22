@@ -19,6 +19,7 @@ public class RobotContainer {
   public RobotContainer() {
     configureButtonBindings();
 
+    // Sets default command for drivetrain
     robotDrive.setDefaultCommand(
       new DefaultDrive(robotDrive, driverController::getLeftY, driverController::getRightX)
     );
