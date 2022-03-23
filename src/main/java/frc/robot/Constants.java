@@ -14,11 +14,6 @@ public final class Constants {
         public static final int opPort = 1;
     }
 
-    public final class ShooterConstants {
-        public static final int flywheelAPort = 8;
-        public static final int flywheelBPort = 9;
-    }
-
     public final class SpeedConstants {
         public static final double targetHeight = 8.7; //ft
         public static final double shootHeight = 2.73; //ft
@@ -31,7 +26,4 @@ public final class Constants {
         public static final double cameraHeight = 34.5; //inches
         public static final double cameraAngle = 32.0; //degrees
     }
-
-
-
 }
