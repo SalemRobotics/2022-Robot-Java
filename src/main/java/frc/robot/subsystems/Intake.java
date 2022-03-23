@@ -1,0 +1,31 @@
+package frc.robot.subsystems;
+
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.revrobotics.CANSparkMax;
+import frc.robot.Constants.IntakeConstants;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+/** Drivetrain uses 4 TalonFX motors, using differntial drive or "tank" drive. */
+public class Intake extends SubsystemBase {
+
+  CANSparkMax leftNeo, rightNeo;
+ 
+
+  public Intake() {
+    leftNeo = new CANSparkMax(IntakeConstants.leftSparkMaxID, MotorType.kBrushless);
+    rightNeo = new CANSparkMax(IntakeConstants.rightSparkMaxID, MotorType.kBrushless);
+
+  }
+/**
+ * spins left and right neo the same direction
+ * @param speed this is speed in a value from 0 to 1
+ */
+  public void autobotsRollout(double speed){
+    leftNeo.set(speed);
+    rightNeo.set(-speed);
+
+
+
+  }
+
+}
