@@ -8,7 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
-import frc.robot.Constants.ShooterConstants.SpeedConstants;
+import frc.robot.Constants.SpeedConstants;
 
 /**
  * Implements shooter subsystem with 2 TalonFXs.
