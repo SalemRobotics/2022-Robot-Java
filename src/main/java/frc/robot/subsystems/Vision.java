@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import java.util.List;
 
+import org.opencv.photo.Photo;
 import org.photonvision.PhotonCamera;
 import org.photonvision.common.hardware.VisionLEDMode;
 import org.photonvision.targeting.PhotonTrackedTarget;
@@ -11,15 +12,16 @@ import frc.robot.Constants.SpeedConstants;
 
 public class Vision extends SubsystemBase {
     PhotonCamera limelight;
+    List<PhotonTrackedTarget> targets;
     public Vision() {
         limelight = new PhotonCamera("gloworm");
+        targets = limelight.getLatestResult().getTargets();
     }
 
     public double getDistance() {
         limelight.setLED(VisionLEDMode.kOn);
         if (limelight.getLatestResult().hasTargets()) {
-            List<PhotonTrackedTarget> targets = limelight.getLatestResult().getTargets();
-            double targetAngle = targets.get(0).getPitch(); //TODO: get largest pitch in list of targets
+            double targetAngle = getMaxPitch(targets); 
             double totalHeight = SpeedConstants.targetHeight - SpeedConstants.cameraHeight;
             double totalAngle = Math.tan(SpeedConstants.cameraAngle + targetAngle);
             return totalHeight / totalAngle;
@@ -27,9 +29,22 @@ public class Vision extends SubsystemBase {
         return -1.0;
     }
 
-    public double getYaw() {
-        List<PhotonTrackedTarget> targets = limelight.getLatestResult().getTargets();
-        double middleTarget = 0.0; //TODO: add middle target sum([x.getYaw() for x in targets]) / len(targets)
-        return middleTarget; //TODO: Put offset here if camera is not in the middle of the robot
+    public double getMaxPitch(List<PhotonTrackedTarget> target) {
+        double temp = 0.0;
+        for (PhotonTrackedTarget e: target) {
+            if (e.getPitch() > temp) {
+                temp = e.getPitch();
+            }
+        }
+        return temp;
+    }
+
+    public double getTargetYaw(List<PhotonTrackedTarget> target) {
+        //TODO: Put offset here if camera is not in the middle of the robot
+        double temp = 0.0;
+        for (PhotonTrackedTarget e: target) {
+            temp += e.getYaw();
+        }
+        return temp / target.size();
     }
 }
