@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.XBConstants;
 import frc.robot.command_groups.ClimbBrakeGroup;
+import frc.robot.command_groups.ClimbDownGroup;
 import frc.robot.command_groups.ClimbUpGroup;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimberBrake;
@@ -30,10 +31,11 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
+    // Climber button configs TODO: please, let's make this differently i hate this
     new JoystickButton(operatorController, Button.kA.value).whenPressed(new ClimbUpGroup(climber));
     new JoystickButton(operatorController, Button.kA.value).whenReleased(new ClimbBrakeGroup(climber));
-    new JoystickButton(operatorController, Button.kB.value).whenHeld(new ClimbDown(climber));
+    new JoystickButton(operatorController, Button.kB.value).whenPressed(new ClimbDownGroup(climber));
+    new JoystickButton(operatorController, Button.kB.value).whenReleased(new ClimbBrakeGroup(climber));
     new JoystickButton(operatorController, Button.kX.value).whenHeld(new ClimbBrakeGroup (climber));
   }
-
 }

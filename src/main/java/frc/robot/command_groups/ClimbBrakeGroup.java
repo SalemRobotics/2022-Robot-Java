@@ -10,17 +10,11 @@ public class ClimbBrakeGroup extends SequentialCommandGroup {
 
     public ClimbBrakeGroup(Climber subsystem) {
         addCommands(
-           
-            new ClimberMotorHalt(
-                subsystem),
+            new ClimberMotorHalt(subsystem),
     
-            
             new WaitCommand(0.5),
-    
             
-            new ClimberBrake(
-                subsystem));
-      
+            new ClimberBrake(subsystem)
+        );
     }
-    
 }
