@@ -1,19 +1,18 @@
 package frc.robot.commands;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 
-public class IntakeIn extends CommandBase{
+public class IntakeOut extends CommandBase {
     private final Intake intake;
-
-    public IntakeIn(Intake subsystem) {
+    public IntakeOut(Intake subsystem) {
         intake = subsystem;
-
         addRequirements(intake);
     }
 
     @Override
     public void execute() {
-        intake.collect(1.0);
+        intake.collect(-1.0);
     }
 
     @Override
