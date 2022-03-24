@@ -13,6 +13,7 @@ public class IntakeIn extends CommandBase{
 
     @Override
     public void execute() {
+        intake.extend();
         intake.collect(1.0);
     }
 
@@ -23,6 +24,7 @@ public class IntakeIn extends CommandBase{
 
     @Override
     public void end(boolean interrupted) {
+        intake.retract();
         intake.halt();
     }
 }
