@@ -41,4 +41,9 @@ public final class Constants {
         public static final int bottomSwitchPort = 8;
         public static final double brakeTime = 0.25;
     }
+    
+    public final class IndexConstants {
+        public static final int indexMotorID = 10;
+        public static final int colorSensorPort = 0;
+    }
 }
