@@ -13,4 +13,9 @@ public final class Constants {
         public static final int drivePort = 0;
         public static final int opPort = 1;
     }
+
+    public final class IntakeConstants {
+        public static final int leftSparkMaxID = 4;
+        public static final int rightSparkMaxID = 5;
+    }
 }
