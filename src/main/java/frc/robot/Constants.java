@@ -13,4 +13,9 @@ public final class Constants {
         public static final int drivePort = 0;
         public static final int opPort = 1;
     }
+
+    public final class IndexConstants {
+        public static final int indexMotorID = 10;
+        public static final int colorSensorPort = 0;
+    }
 }
