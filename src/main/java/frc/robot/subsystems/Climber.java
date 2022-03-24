@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
@@ -38,11 +39,16 @@ public class Climber extends SubsystemBase {
 
     /** Toggles pneumatic brake for climber. */
     public void brake() {
-        solenoid.toggle();
+        solenoid.set(Value.kReverse);
     }
 
     /** Stops all motors. */
     public void halt() {
         motorA.set(TalonSRXControlMode.PercentOutput, 0.0);
+    }
+
+
+    public void releaseBrake() {
+        solenoid.set(Value.kForward);
     }
 }

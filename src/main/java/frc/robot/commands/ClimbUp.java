@@ -16,17 +16,20 @@ public class ClimbUp extends CommandBase {
     @Override
     public void execute() {
         climber.climb(1.0, false);
+        System.out.println("Climber is moving up!");
     }
 
     @Override
     public boolean isFinished() {
+        System.out.println("Climber is finished.");
         return false;
     }
 
     // Halts motors and toggles brake when command ends.
     @Override
     public void end(boolean interrupted) {
+        System.out.println("All your climber belong to us. Climber up ends.");
         climber.halt();
-        climber.brake();
+    //    climber.brake();
     }
 }

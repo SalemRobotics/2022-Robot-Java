@@ -14,17 +14,21 @@ public class ClimbDown extends CommandBase{
     // Runs motors in reverse at full speed.
     @Override
     public void execute() {
+        climber.releaseBrake();
         climber.climb(-1.0, true);
+        System.out.println("Climber is moving down!");
     }
 
     @Override
     public boolean isFinished() {
+        System.out.println("Is finished");
         return false;
     }
 
     // Halts motors and toggles brake when command ends.
     @Override
     public void end(boolean interrupted) {
+        System.out.println("All your climb belong to us. Climb Down ends.");
         climber.halt();
         climber.brake();
     }

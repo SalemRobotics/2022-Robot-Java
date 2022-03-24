@@ -4,8 +4,10 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.XBConstants;
+import frc.robot.command_groups.ClimbBrakeGroup;
+import frc.robot.command_groups.ClimbUpGroup;
 import frc.robot.commands.ClimbDown;
-import frc.robot.commands.ClimbUp;
+import frc.robot.commands.ClimberBrake;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
@@ -28,8 +30,10 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    new JoystickButton(operatorController, Button.kA.value).whenHeld(new ClimbUp(climber));
+    new JoystickButton(operatorController, Button.kA.value).whenPressed(new ClimbUpGroup(climber));
+    new JoystickButton(operatorController, Button.kA.value).whenReleased(new ClimbBrakeGroup(climber));
     new JoystickButton(operatorController, Button.kB.value).whenHeld(new ClimbDown(climber));
+    new JoystickButton(operatorController, Button.kX.value).whenHeld(new ClimbBrakeGroup (climber));
   }
 
 }
