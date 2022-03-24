@@ -16,12 +16,10 @@ public class ClimberMotorHalt extends CommandBase {
     @Override
     public void execute() {
         climber.halt();
-        System.out.println("Climber is halt");
     }
 
     @Override
     public boolean isFinished() {
-        System.out.println("Climber is always finished.");
         return true;
     }
   

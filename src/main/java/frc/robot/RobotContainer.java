@@ -14,7 +14,7 @@ import frc.robot.subsystems.Drivetrain;
 public class RobotContainer {
 
   private final Drivetrain robotDrive = new Drivetrain();
-  private final Climber climber = new Climber();
+  public final Climber climber = new Climber();
 
   XboxController driverController = new XboxController(XBConstants.drivePort);
   XboxController operatorController = new XboxController(XBConstants.opPort);

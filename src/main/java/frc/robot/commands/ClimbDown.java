@@ -15,21 +15,18 @@ public class ClimbDown extends CommandBase{
     @Override
     public void execute() {
         climber.releaseBrake();
-        climber.climb(-1.0, true);
-        System.out.println("Climber is moving down!");
+        climber.climb(-1.0, false);
     }
 
     @Override
     public boolean isFinished() {
-        System.out.println("Is finished");
-        return false;
+        return climber.isAtLimit();
     }
 
     // Halts motors and toggles brake when command ends.
     @Override
     public void end(boolean interrupted) {
-        System.out.println("All your climb belong to us. Climb Down ends.");
         climber.halt();
-        climber.brake();
+        // climber.brake();
     }
 }

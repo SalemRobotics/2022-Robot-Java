@@ -15,7 +15,7 @@ import frc.robot.Constants.ClimberConstants;
 public class Climber extends SubsystemBase {
     WPI_TalonSRX motorA, motorB;
     DoubleSolenoid solenoid;
-    DigitalInput limitSwitch;
+    DigitalInput topSwitch, bottomSwitch;
 
     public Climber() {
         motorA = new WPI_TalonSRX(ClimberConstants.kMotorAPort);
@@ -25,7 +25,8 @@ public class Climber extends SubsystemBase {
 
         solenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, ClimberConstants.kForwardChannel, ClimberConstants.kReverseChannel);
 
-        limitSwitch = new DigitalInput(ClimberConstants.limitSwitchPort);
+        topSwitch = new DigitalInput(ClimberConstants.topSwitchPort);
+        bottomSwitch = new DigitalInput(ClimberConstants.bottomSwitchPort);
     }
 
     /**
@@ -34,14 +35,10 @@ public class Climber extends SubsystemBase {
      * @param currentLimit Whether currentLimit is enabled or disabled
      */
     public void climb(double speed, boolean currentLimit) {
-        motorA.configPeakCurrentLimit(20, 500);
-        motorB.configPeakCurrentLimit(20, 500);
+        motorA.configPeakCurrentLimit(50, 500);
+        motorB.configPeakCurrentLimit(50, 500);
         motorA.enableCurrentLimit(currentLimit);
         motorB.enableCurrentLimit(currentLimit);
-        if (limitSwitch.get()) {
-            halt();
-            return;
-        }
         motorA.set(TalonSRXControlMode.PercentOutput, speed);
     }
 
@@ -55,6 +52,9 @@ public class Climber extends SubsystemBase {
         motorA.set(TalonSRXControlMode.PercentOutput, 0.0);
     }
 
+    public boolean isAtLimit() {
+        return bottomSwitch.get() || topSwitch.get();
+    }
 
     public void releaseBrake() {
         solenoid.set(Value.kForward);

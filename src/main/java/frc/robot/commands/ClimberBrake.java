@@ -16,12 +16,10 @@ public class ClimberBrake extends CommandBase {
     @Override
     public void execute() {
         climber.brake();
-        System.out.println("HAHAHAHAHAHAHAHA BRAKE");
     }
 
     @Override
     public boolean isFinished() {
-        System.out.println("Climber is finished.");
         return true;
     }
 
