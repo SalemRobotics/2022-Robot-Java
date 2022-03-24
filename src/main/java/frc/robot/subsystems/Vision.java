@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import java.util.List;
 
-import org.opencv.photo.Photo;
 import org.photonvision.PhotonCamera;
 import org.photonvision.common.hardware.VisionLEDMode;
 import org.photonvision.targeting.PhotonTrackedTarget;
@@ -39,12 +38,12 @@ public class Vision extends SubsystemBase {
         return temp;
     }
 
-    public double getTargetYaw(List<PhotonTrackedTarget> target) {
+    public double getTargetYaw() {
         //TODO: Put offset here if camera is not in the middle of the robot
         double temp = 0.0;
-        for (PhotonTrackedTarget e: target) {
+        for (PhotonTrackedTarget e: targets) {
             temp += e.getYaw();
         }
-        return temp / target.size();
+        return temp / targets.size();
     }
 }

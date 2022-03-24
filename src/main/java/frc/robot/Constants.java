@@ -7,6 +7,17 @@ public final class Constants {
         public static final int kLeftRearPort = 1;
         public static final int kRightFrontPort = 2;
         public static final int kRightRearPort = 3;
+
+        public final class DriveTrainPIDConstants {
+            public static final double turnTravelUnitsPerRotation = 3600;
+            public static final double pigeonUnitsPerRotation = 8192;
+            public static final double P = 2.0;
+            public static final double I = 0.0;
+            public static final double D = 4.0;
+            public static final double F = 0.0;
+            public static final double Iz = 200;
+            public static final double peak = 1.0;
+        }
     }
 
     public final class XBConstants {
