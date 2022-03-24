@@ -7,6 +7,7 @@ import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 import frc.robot.Constants.ClimberConstants;
@@ -14,6 +15,7 @@ import frc.robot.Constants.ClimberConstants;
 public class Climber extends SubsystemBase {
     WPI_TalonSRX motorA, motorB;
     DoubleSolenoid solenoid;
+    DigitalInput limitSwitch;
 
     public Climber() {
         motorA = new WPI_TalonSRX(ClimberConstants.kMotorAPort);
@@ -22,6 +24,8 @@ public class Climber extends SubsystemBase {
         motorB.setInverted(InvertType.OpposeMaster);
 
         solenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, ClimberConstants.kForwardChannel, ClimberConstants.kReverseChannel);
+
+        limitSwitch = new DigitalInput(ClimberConstants.limitSwitchPort);
     }
 
     /**
@@ -34,6 +38,10 @@ public class Climber extends SubsystemBase {
         motorB.configPeakCurrentLimit(20, 500);
         motorA.enableCurrentLimit(currentLimit);
         motorB.enableCurrentLimit(currentLimit);
+        if (limitSwitch.get()) {
+            halt();
+            return;
+        }
         motorA.set(TalonSRXControlMode.PercentOutput, speed);
     }
 
