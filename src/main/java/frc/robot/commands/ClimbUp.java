@@ -1,9 +1,9 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
 
-public class ClimbUp extends InstantCommand {
+public class ClimbUp extends CommandBase {
     
     private final Climber climber;
 
@@ -15,7 +15,12 @@ public class ClimbUp extends InstantCommand {
     // Sets climber motors to run at full speed.
     @Override
     public void execute() {
-        climber.climb(1.0);
+        climber.climb(1.0, false);
+    }
+
+    @Override
+    public boolean isFinished() {
+        return false;
     }
 
     // Halts motors and toggles brake when command ends.

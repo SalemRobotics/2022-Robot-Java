@@ -17,7 +17,7 @@ public final class Constants {
     public final class ClimberConstants {
         public static final int kMotorAPort = 6;
         public static final int kMotorBPort = 7;
-        public static final int kForwardChannel = 1;
-        public static final int kReverseChannel = 2;
+        public static final int kForwardChannel = 10;
+        public static final int kReverseChannel = 15;
     }
 }

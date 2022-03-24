@@ -23,16 +23,18 @@ public class Climber extends SubsystemBase {
         solenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, ClimberConstants.kForwardChannel, ClimberConstants.kReverseChannel);
     }
 
-    /** 
-     * Sets TalonSRX motor speed.
-     * @param speed speed motor will run at 
+    /**
+     * Sets TalonSRX current limit and motor speeds for the climber
+     * @param speed Percent of output speed
+     * @param currentLimit Whether currentLimit is enabled or disabled
      */
-    public void climb(double speed) {
+    public void climb(double speed, boolean currentLimit) {
+        motorA.configPeakCurrentLimit(20, 500);
+        motorB.configPeakCurrentLimit(20, 500);
+        motorA.enableCurrentLimit(currentLimit);
+        motorB.enableCurrentLimit(currentLimit);
         motorA.set(TalonSRXControlMode.PercentOutput, speed);
     }
-
-    //TODO: Make climbDown function that takes account of voltage.
-
 
     /** Toggles pneumatic brake for climber. */
     public void brake() {

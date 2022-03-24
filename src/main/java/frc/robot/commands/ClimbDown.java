@@ -1,9 +1,9 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
 
-public class ClimbDown extends InstantCommand{
+public class ClimbDown extends CommandBase{
     private final Climber climber;
     
     public ClimbDown(Climber subsystem) {
@@ -14,7 +14,12 @@ public class ClimbDown extends InstantCommand{
     // Runs motors in reverse at full speed.
     @Override
     public void execute() {
-        climber.climb(-1.0);
+        climber.climb(-1.0, true);
+    }
+
+    @Override
+    public boolean isFinished() {
+        return false;
     }
 
     // Halts motors and toggles brake when command ends.

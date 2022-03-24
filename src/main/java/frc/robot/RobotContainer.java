@@ -28,8 +28,8 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    new JoystickButton(operatorController, Button.kA.value).whenPressed(new ClimbUp(climber));
-    new JoystickButton(operatorController, Button.kB.value).whenPressed(new ClimbDown(climber));
+    new JoystickButton(operatorController, Button.kA.value).whenHeld(new ClimbUp(climber));
+    new JoystickButton(operatorController, Button.kB.value).whenHeld(new ClimbDown(climber));
   }
 
 }
