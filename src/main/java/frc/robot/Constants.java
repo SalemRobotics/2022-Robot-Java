@@ -19,5 +19,6 @@ public final class Constants {
         public static final int kMotorBPort = 7;
         public static final int kForwardChannel = 10;
         public static final int kReverseChannel = 15;
+        public static final double brakeTime = 0.25;
     }
 }

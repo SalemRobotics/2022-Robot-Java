@@ -7,8 +7,6 @@ import frc.robot.Constants.XBConstants;
 import frc.robot.command_groups.ClimbBrakeGroup;
 import frc.robot.command_groups.ClimbDownGroup;
 import frc.robot.command_groups.ClimbUpGroup;
-import frc.robot.commands.ClimbDown;
-import frc.robot.commands.ClimberBrake;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
@@ -36,6 +34,6 @@ public class RobotContainer {
     new JoystickButton(operatorController, Button.kA.value).whenReleased(new ClimbBrakeGroup(climber));
     new JoystickButton(operatorController, Button.kB.value).whenPressed(new ClimbDownGroup(climber));
     new JoystickButton(operatorController, Button.kB.value).whenReleased(new ClimbBrakeGroup(climber));
-    new JoystickButton(operatorController, Button.kX.value).whenHeld(new ClimbBrakeGroup (climber));
+    new JoystickButton(operatorController, Button.kX.value).whenHeld(new ClimbBrakeGroup(climber));
   }
 }
