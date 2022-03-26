@@ -28,7 +28,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return driveAuton.getCommand();
+    return driveAuton.getCommand(robotDrive);
   }
 
   private void configureButtonBindings() {
