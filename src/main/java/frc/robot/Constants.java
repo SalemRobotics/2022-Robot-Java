@@ -8,6 +8,20 @@ public final class Constants {
         public static final int kRightFrontPort = 2;
         public static final int kRightRearPort = 3;
 
+        public final class DrivetrainAutoConstants {
+            public static final double ksVolts = 0.54539;
+            public static final double kvVoltSecondsPerMeter = 3.3683;
+            public static final double kaVoltSecondsSquaredPerMeter = 0.26098;
+            public static final double trackWidthMeters = 0.635;
+            public static final double maxSpeedMetersPerSecond = 3.0;
+            public static final double maxAccelerationMetersPerSecondSq = 3.0;
+            public static final double encoderMetersFromPulses = 10 / (2048 * 0.3192);
+            public static final double metersPerSecondFromPulses = 100 / (2048 * 0.3192);
+            public static final double ramseteB = 2;
+            public static final double ramseteZeta = 0.7;
+            public static final double kpDriveVelocity = 3.8685;
+        }
+
         public final class DriveTrainPIDConstants {
             public static final double turnTravelUnitsPerRotation = 3600;
             public static final double pigeonUnitsPerRotation = 8192;
@@ -37,4 +51,5 @@ public final class Constants {
         public static final double cameraHeight = 34.5; //inches
         public static final double cameraAngle = 32.0; //degrees
     }
+
 }

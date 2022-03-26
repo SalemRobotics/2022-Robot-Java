@@ -1,8 +1,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
@@ -19,6 +21,7 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 
 import frc.robot.Constants.DrivetrainConstants;
 import frc.robot.Constants.DrivetrainConstants.DriveTrainPIDConstants;
+import frc.robot.Constants.DrivetrainConstants.DrivetrainAutoConstants;
 
 /** Drivetrain uses 4 TalonFX motors, using differntial drive or "tank" drive. */
 public class Drivetrain extends SubsystemBase {
@@ -72,16 +75,27 @@ public class Drivetrain extends SubsystemBase {
     leftConfig.slot1.closedLoopPeakOutput = DriveTrainPIDConstants.peak;
     leftConfig.slot1.allowableClosedloopError = 0;
 
+    // Set differential drive
     difDrive = new DifferentialDrive(leftMotors, rightMotors);
 
+    // Create encoders
     leftEncoder = leftFrontMotor.getSensorCollection();
     rightEncoder = rightFrontMotor.getSensorCollection();
 
+    // Create gyro and odometry
     gyro = new PigeonIMU(1);
-
     odometry = new DifferentialDriveOdometry(getRotation2d());
 
+    resetEncoders();
+  }
 
+  @Override
+  public void periodic() {
+      odometry.update(
+        getRotation2d(), 
+        leftEncoder.getIntegratedSensorVelocity() * DrivetrainAutoConstants.metersPerSecondFromPulses, 
+        rightEncoder.getIntegratedSensorVelocity() * DrivetrainAutoConstants.metersPerSecondFromPulses
+      );
   }
 
   /**
@@ -93,16 +107,65 @@ public class Drivetrain extends SubsystemBase {
     difDrive.arcadeDrive(-fwd, rot, true);
   }
 
+  public void tankDriveVolts(double leftVolts, double rightVolts) {
+    leftMotors.set(leftVolts);
+    rightMotors.set(-rightVolts);
+    difDrive.feed();
+  }
+
+  public Pose2d getPose() {
+    return odometry.getPoseMeters();
+  }
+
+  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    DifferentialDriveWheelSpeeds speeds = new DifferentialDriveWheelSpeeds(
+      leftEncoder.getIntegratedSensorVelocity() * DrivetrainAutoConstants.metersPerSecondFromPulses, 
+      rightEncoder.getIntegratedSensorVelocity() * DrivetrainAutoConstants.metersPerSecondFromPulses
+      );
+    return speeds;
+  }
+
   public Rotation2d getRotation2d() {
-    double[] ypr = {};
+    double[] ypr = new double[3];
     gyro.getYawPitchRoll(ypr);
     return Rotation2d.fromDegrees(ypr[0] * -1);
+  }
+
+  public void resetEncoders() {
+    leftEncoder.setIntegratedSensorPosition(0.0, 0);
+    rightEncoder.setIntegratedSensorPosition(0.0, 0);
+  }
+
+  public double getAverageEncoderDistance() {
+    return (
+      leftEncoder.getIntegratedSensorPosition() * DrivetrainAutoConstants.encoderMetersFromPulses +
+      rightEncoder.getIntegratedSensorPosition() * DrivetrainAutoConstants.encoderMetersFromPulses
+    ) / 2.0;
+  }
+
+  public void setMaxOutput(double maxOutput) {
+    difDrive.setMaxOutput(maxOutput);
+  }
+
+  public void resetOdometry(Pose2d pose) {
+    resetEncoders();
+    odometry.resetPosition(pose, getRotation2d());
+  }
+
+  public void getHeading() {
+    getRotation2d().getDegrees();
   }
 
   /** Zeroes the gyro's heading */
   public void zeroHeading() {
     gyro.setFusedHeading(0.0);
   }  
+
+  public double getTurnRate() {
+    double[] xyz = new double[3];
+    gyro.getRawGyro(xyz);
+    return xyz[1];
+  }
 
   public void alignToTarget(double errorAngle) {
     zeroHeading();
