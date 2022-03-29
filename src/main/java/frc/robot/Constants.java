@@ -17,7 +17,10 @@ public final class Constants {
     public final class IntakeConstants {
         public static final int leftSparkMaxID = 4;
         public static final int rightSparkMaxID = 5;
-        public static final int leftSolenoidChannel = 8;
-        public static final int rightSolenoidChannel = 9;
+        public static final int leftSolenoidChannelA = 8;
+        public static final int rightSolenoidChannelA = 9;
+        public static final int leftSolenoidChannelB = 4;
+        public static final int rightSolenoidChannelB = 5;
+
     }
 }

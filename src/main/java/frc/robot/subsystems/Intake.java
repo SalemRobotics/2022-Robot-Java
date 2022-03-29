@@ -1,7 +1,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import frc.robot.Constants.IntakeConstants;
@@ -11,14 +12,16 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class Intake extends SubsystemBase {
 
   CANSparkMax leftNeo, rightNeo;
-  Solenoid leftSolenoid, rightSolenoid;
+  DoubleSolenoid leftSolenoid, rightSolenoid;
 
   public Intake() {
     leftNeo = new CANSparkMax(IntakeConstants.leftSparkMaxID, MotorType.kBrushless);
     rightNeo = new CANSparkMax(IntakeConstants.rightSparkMaxID, MotorType.kBrushless);
 
-    leftSolenoid = new Solenoid(PneumaticsModuleType.REVPH, IntakeConstants.leftSolenoidChannel);
-    rightSolenoid = new Solenoid(PneumaticsModuleType.REVPH, IntakeConstants.rightSolenoidChannel);
+    leftSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, IntakeConstants.leftSolenoidChannelA, IntakeConstants.leftSolenoidChannelB);
+    rightSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, IntakeConstants.rightSolenoidChannelA, IntakeConstants.rightSolenoidChannelB);
+    leftSolenoid.set(Value.kReverse);
+    rightSolenoid.set(Value.kReverse);
   }
 
 /**
@@ -31,13 +34,13 @@ public class Intake extends SubsystemBase {
   }
 
   public void extend() {
-    leftSolenoid.set(true);
-    rightSolenoid.set(true);
+    leftSolenoid.set(Value.kForward);
+    rightSolenoid.set(Value.kForward);
   }
 
   public void retract() {
-    leftSolenoid.set(false);
-    rightSolenoid.set(false);
+    leftSolenoid.set(Value.kReverse);
+    rightSolenoid.set(Value.kReverse);
   }
 
   public void halt() {
