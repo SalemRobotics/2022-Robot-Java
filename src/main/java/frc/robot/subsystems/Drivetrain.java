@@ -29,7 +29,7 @@ public class Drivetrain extends SubsystemBase {
 
   WPI_TalonFX leftFrontMotor, leftRearMotor, rightFrontMotor, rightRearMotor;
   TalonFXConfiguration leftConfig, rightConfig;
-  TalonFXSensorCollection leftEncoder, rightEncoder;
+  public TalonFXSensorCollection leftEncoder, rightEncoder;
   PigeonIMU gyro;
   MotorControllerGroup leftMotors, rightMotors;
   DifferentialDrive difDrive;
@@ -40,6 +40,7 @@ public class Drivetrain extends SubsystemBase {
     //left motors
     leftFrontMotor = new WPI_TalonFX(DrivetrainConstants.kLeftFrontPort);
     leftFrontMotor.setNeutralMode(NeutralMode.Coast);
+    leftFrontMotor.setSensorPhase(false);
     leftRearMotor = new WPI_TalonFX(DrivetrainConstants.kLeftRearPort);
     leftRearMotor.setNeutralMode(NeutralMode.Coast);
 
@@ -53,6 +54,8 @@ public class Drivetrain extends SubsystemBase {
     rightFrontMotor.setNeutralMode(NeutralMode.Coast);
     rightRearMotor = new WPI_TalonFX(DrivetrainConstants.kRightRearPort);
     rightRearMotor.setNeutralMode(NeutralMode.Coast);
+
+    rightFrontMotor.setSensorPhase(true);
 
     rightMotors = new MotorControllerGroup(
       rightFrontMotor,
@@ -72,7 +75,7 @@ public class Drivetrain extends SubsystemBase {
     // set PID sensor
     leftConfig.auxiliaryPID.selectedFeedbackSensor = FeedbackDevice.RemoteSensor0;
     leftConfig.auxiliaryPID.selectedFeedbackCoefficient = 
-    DriveTrainPIDConstants.turnTravelUnitsPerRotation / DriveTrainPIDConstants.pigeonUnitsPerRotation;
+        DriveTrainPIDConstants.turnTravelUnitsPerRotation / DriveTrainPIDConstants.pigeonUnitsPerRotation;
     
     // PID config
     leftConfig.slot1.kP = DriveTrainPIDConstants.P;
@@ -86,10 +89,6 @@ public class Drivetrain extends SubsystemBase {
     // Set differential drive
     difDrive = new DifferentialDrive(leftMotors, rightMotors);
 
-    // Create encoders
-    leftEncoder = leftFrontMotor.getSensorCollection();
-    rightEncoder = rightFrontMotor.getSensorCollection();
-
     // Create gyro and odometry
     odometry = new DifferentialDriveOdometry(getRotation2d());
 
@@ -100,8 +99,8 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {
       odometry.update(
         getRotation2d(), 
-        leftEncoder.getIntegratedSensorVelocity() * DrivetrainAutoConstants.metersPerSecondFromPulses, 
-        rightEncoder.getIntegratedSensorVelocity() * DrivetrainAutoConstants.metersPerSecondFromPulses
+        leftFrontMotor.getSelectedSensorPosition() * DrivetrainAutoConstants.encoderMetersFromPulses, 
+        rightFrontMotor.getSelectedSensorPosition() * DrivetrainAutoConstants.encoderMetersFromPulses
       );
   }
 
@@ -126,8 +125,8 @@ public class Drivetrain extends SubsystemBase {
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
     DifferentialDriveWheelSpeeds speeds = new DifferentialDriveWheelSpeeds(
-      leftEncoder.getIntegratedSensorVelocity() * DrivetrainAutoConstants.metersPerSecondFromPulses, 
-      rightEncoder.getIntegratedSensorVelocity() * DrivetrainAutoConstants.metersPerSecondFromPulses
+      leftFrontMotor.getSelectedSensorVelocity() * DrivetrainAutoConstants.metersPerSecondFromPulses, 
+      rightFrontMotor.getSelectedSensorVelocity() * DrivetrainAutoConstants.metersPerSecondFromPulses
       );
     return speeds;
   }
@@ -139,14 +138,14 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void resetEncoders() {
-    leftEncoder.setIntegratedSensorPosition(0.0, 0);
-    rightEncoder.setIntegratedSensorPosition(0.0, 0);
+    leftFrontMotor.setSelectedSensorPosition(0.0);
+    rightFrontMotor.setSelectedSensorPosition(0.0);
   }
 
   public double getAverageEncoderDistance() {
     return (
-      leftEncoder.getIntegratedSensorPosition() * DrivetrainAutoConstants.encoderMetersFromPulses +
-      rightEncoder.getIntegratedSensorPosition() * DrivetrainAutoConstants.encoderMetersFromPulses
+      leftFrontMotor.getSelectedSensorPosition() * DrivetrainAutoConstants.encoderMetersFromPulses +
+      rightFrontMotor.getSelectedSensorPosition() * DrivetrainAutoConstants.encoderMetersFromPulses
     ) / 2.0;
   }
 

@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -58,7 +59,9 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {}
 
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+    m_robotContainer.robotDrive.resetOdometry(new Pose2d());
+  }
 
   /** This function is called periodically during operator control. */
   @Override
@@ -67,6 +70,11 @@ public class Robot extends TimedRobot {
     m_robotContainer.robotDrive.odometry.getPoseMeters().getX());
     SmartDashboard.putNumber("Odometry Y", 
     m_robotContainer.robotDrive.odometry.getPoseMeters().getY());
+
+    SmartDashboard.putNumber("leftEncoder pulses", 
+    m_robotContainer.robotDrive.leftEncoder.getIntegratedSensorPosition());
+    SmartDashboard.putNumber("rightEncoder pulse", 
+    m_robotContainer.robotDrive.rightEncoder.getIntegratedSensorPosition());
   }
 
   @Override
