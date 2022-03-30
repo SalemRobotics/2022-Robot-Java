@@ -63,6 +63,7 @@ public class Drivetrain extends SubsystemBase {
     // Create motor configs
     leftConfig = new TalonFXConfiguration();
     rightConfig = new TalonFXConfiguration();
+    gyro = new PigeonIMU(1);
 
     // set remote sensor source
     leftConfig.remoteFilter0.remoteSensorSource = RemoteSensorSource.GadgeteerPigeon_Yaw;
@@ -90,7 +91,6 @@ public class Drivetrain extends SubsystemBase {
     rightEncoder = rightFrontMotor.getSensorCollection();
 
     // Create gyro and odometry
-    gyro = new PigeonIMU(1);
     odometry = new DifferentialDriveOdometry(getRotation2d());
 
     resetEncoders();

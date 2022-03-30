@@ -24,13 +24,13 @@ public class DriveAuton {
     TrajectoryConfig config;
     Trajectory trajectory;
     RamseteCommand ramseteCommand;
-    Drivetrain drive;
     SimpleMotorFeedforward feedforward;
 
     private final DifferentialDriveKinematics driveKinematics = 
     new DifferentialDriveKinematics(DrivetrainAutoConstants.trackWidthMeters);
 
-    public Command getCommand() {
+    public Command getCommand(Drivetrain drive) {
+
 
         feedforward = new SimpleMotorFeedforward(
             DrivetrainAutoConstants.ksVolts, 
