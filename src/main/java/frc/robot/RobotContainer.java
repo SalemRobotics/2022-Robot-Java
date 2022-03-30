@@ -12,11 +12,11 @@ import frc.robot.subsystems.Drivetrain;
 
 public class RobotContainer {
 
-  private final Drivetrain robotDrive = new Drivetrain();
+  Drivetrain robotDrive = new Drivetrain();
   private final DriveAuton driveAuton = new DriveAuton();
 
-  XboxController driverController = new XboxController(XBConstants.drivePort);
-  XboxController operatorController = new XboxController(XBConstants.opPort);
+  private final XboxController driverController = new XboxController(XBConstants.drivePort);
+  private final XboxController operatorController = new XboxController(XBConstants.opPort);
 
   public RobotContainer() {
     configureButtonBindings();

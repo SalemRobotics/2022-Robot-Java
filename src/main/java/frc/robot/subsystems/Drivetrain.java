@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.FollowerType;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.RemoteSensorSource;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
@@ -31,14 +32,17 @@ public class Drivetrain extends SubsystemBase {
   TalonFXSensorCollection leftEncoder, rightEncoder;
   PigeonIMU gyro;
   MotorControllerGroup leftMotors, rightMotors;
-  public static DifferentialDrive difDrive;
-  DifferentialDriveOdometry odometry;
+  DifferentialDrive difDrive;
+  public DifferentialDriveOdometry odometry;
 
   public Drivetrain() {
 
     //left motors
     leftFrontMotor = new WPI_TalonFX(DrivetrainConstants.kLeftFrontPort);
+    leftFrontMotor.setNeutralMode(NeutralMode.Coast);
     leftRearMotor = new WPI_TalonFX(DrivetrainConstants.kLeftRearPort);
+    leftRearMotor.setNeutralMode(NeutralMode.Coast);
+
     leftMotors = new MotorControllerGroup(
       leftFrontMotor, 
       leftRearMotor
@@ -46,7 +50,10 @@ public class Drivetrain extends SubsystemBase {
 
     //right motors
     rightFrontMotor = new WPI_TalonFX(DrivetrainConstants.kRightFrontPort);
+    rightFrontMotor.setNeutralMode(NeutralMode.Coast);
     rightRearMotor = new WPI_TalonFX(DrivetrainConstants.kRightRearPort);
+    rightRearMotor.setNeutralMode(NeutralMode.Coast);
+
     rightMotors = new MotorControllerGroup(
       rightFrontMotor,
       rightRearMotor
@@ -169,9 +176,13 @@ public class Drivetrain extends SubsystemBase {
 
   public void alignToTarget(double errorAngle) {
     zeroHeading();
+    
     leftFrontMotor.selectProfileSlot(1, 1);
+    leftRearMotor.follow(leftFrontMotor);
     leftFrontMotor.set(TalonFXControlMode.PercentOutput, 0.0, DemandType.AuxPID, errorAngle);
+
     rightFrontMotor.follow(leftFrontMotor, FollowerType.AuxOutput1);
     rightFrontMotor.setInverted(TalonFXInvertType.OpposeMaster);
+    rightRearMotor.follow(rightFrontMotor);
   }
 }
