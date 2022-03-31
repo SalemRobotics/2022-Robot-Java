@@ -31,7 +31,14 @@ public final class Constants {
         public static final double cameraHeight = 34.5; //inches
         public static final double cameraAngle = 32.0; //degrees
     }
-
-
-
+  
+    public final class ClimberConstants {
+        public static final int kMotorAPort = 6;
+        public static final int kMotorBPort = 7;
+        public static final int kForwardChannel = 10;
+        public static final int kReverseChannel = 15;
+        public static final int topSwitchPort = 9;
+        public static final int bottomSwitchPort = 8;
+        public static final double brakeTime = 0.25;
+    }
 }
