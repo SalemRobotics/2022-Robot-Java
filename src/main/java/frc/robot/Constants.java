@@ -21,6 +21,5 @@ public final class Constants {
         public static final int rightSolenoidChannelA = 9;
         public static final int leftSolenoidChannelB = 4;
         public static final int rightSolenoidChannelB = 5;
-
     }
 }
