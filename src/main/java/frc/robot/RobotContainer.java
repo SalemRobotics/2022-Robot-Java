@@ -7,9 +7,8 @@ import frc.robot.Constants.XBConstants;
 import frc.robot.command_groups.ClimbBrakeGroup;
 import frc.robot.command_groups.ClimbDownGroup;
 import frc.robot.command_groups.ClimbUpGroup;
+import frc.robot.command_groups.ShootIndexGroup;
 import frc.robot.commands.DefaultDrive;
-import frc.robot.commands.Shoot;
-import frc.robot.commands.IndexIn;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
@@ -37,7 +36,7 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     // Shooter button
-    new JoystickButton(operatorController, Button.kX.value).whenHeld(new Shoot(shooter));
+    new JoystickButton(operatorController, Button.kX.value).whenHeld(new ShootIndexGroup(shooter, indexer));
     // Climber button configs TODO: please, let's make this differently i hate this
     new JoystickButton(operatorController, Button.kA.value).whenPressed(new ClimbUpGroup(climber));
     new JoystickButton(operatorController, Button.kA.value).whenReleased(new ClimbBrakeGroup(climber));
