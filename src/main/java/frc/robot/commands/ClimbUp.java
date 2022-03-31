@@ -20,7 +20,7 @@ public class ClimbUp extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return climber.isAtLimit();
+        return climber.isTouchingBar();
     }
 
     // Halts motors and toggles brake when command ends.

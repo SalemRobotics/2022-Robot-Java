@@ -53,7 +53,12 @@ public class Climber extends SubsystemBase {
     }
 
     public boolean isAtLimit() {
-        return bottomSwitch.get() || topSwitch.get();
+        return !bottomSwitch.get();
+    }
+
+
+    public boolean isTouchingBar(){
+        return !topSwitch.get();
     }
 
     public void releaseBrake() {
