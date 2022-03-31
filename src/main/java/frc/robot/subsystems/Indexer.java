@@ -22,6 +22,7 @@ public class Indexer extends SubsystemBase {
 
     public Indexer() {
         indexMotor = new CANSparkMax(IndexConstants.indexMotorID, MotorType.kBrushless);
+        indexMotor.setInverted(true);
         colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
         colorMatch = new ColorMatch();
 

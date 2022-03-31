@@ -6,6 +6,7 @@ import frc.robot.commands.Shoot;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Shooter;
 
+
 public class ShootIndexGroup extends ParallelCommandGroup {
     public ShootIndexGroup(Shooter shooter, Indexer indexer) {
         addCommands(

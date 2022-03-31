@@ -37,6 +37,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     // Shooter button
     new JoystickButton(operatorController, Button.kX.value).whenHeld(new ShootIndexGroup(shooter, indexer));
+    
     // Climber button configs TODO: please, let's make this differently i hate this
     new JoystickButton(operatorController, Button.kA.value).whenPressed(new ClimbUpGroup(climber));
     new JoystickButton(operatorController, Button.kA.value).whenReleased(new ClimbBrakeGroup(climber));
