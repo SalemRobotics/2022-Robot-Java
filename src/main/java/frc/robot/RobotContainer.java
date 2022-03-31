@@ -34,6 +34,5 @@ public class RobotContainer {
     new JoystickButton(operatorController, Button.kA.value).whenReleased(new ClimbBrakeGroup(climber));
     new JoystickButton(operatorController, Button.kB.value).whenPressed(new ClimbDownGroup(climber));
     new JoystickButton(operatorController, Button.kB.value).whenReleased(new ClimbBrakeGroup(climber));
-    new JoystickButton(operatorController, Button.kX.value).whenHeld(new ClimbBrakeGroup(climber));
   }
 }
