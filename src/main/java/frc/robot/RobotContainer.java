@@ -6,15 +6,17 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.XBConstants;
 
 import frc.robot.commands.DefaultDrive;
-
+import frc.robot.commands.Shoot;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
 
 public class RobotContainer {
 
   private final Drivetrain robotDrive = new Drivetrain();
+  private final Shooter shooter = new Shooter();
 
-  XboxController driverController = new XboxController(XBConstants.drivePort);
-  XboxController operatorController = new XboxController(XBConstants.opPort);
+  private final XboxController driverController = new XboxController(XBConstants.drivePort);
+  private final XboxController operatorController = new XboxController(XBConstants.opPort);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -26,7 +28,7 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-
+    new JoystickButton(operatorController, Button.kB.value).whenHeld(new Shoot(shooter));
   }
 
 }

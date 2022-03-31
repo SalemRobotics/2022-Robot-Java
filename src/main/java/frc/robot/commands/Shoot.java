@@ -1,9 +1,9 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
-public class Shoot extends InstantCommand {
+public class Shoot extends CommandBase {
     private final Shooter shooter;
     public Shoot(Shooter subsystem) {
         shooter = subsystem;
@@ -12,7 +12,13 @@ public class Shoot extends InstantCommand {
 
     @Override
     public void execute() {
-        shooter.shoot(targetDistance); //TODO: add distance from limelight to goal from future vision subsytem
+        // shooter.shoot(targetDistance); //TODO: add distance from limelight to goal from future vision subsytem
+        shooter.manualShoot();
+    }
+
+    @Override
+    public boolean isFinished() {
+        return false;
     }
 
     @Override

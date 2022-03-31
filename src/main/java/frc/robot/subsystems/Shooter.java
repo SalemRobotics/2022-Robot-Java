@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
@@ -25,8 +26,13 @@ public class Shooter extends SubsystemBase {
         flywheelA = new WPI_TalonFX(ShooterConstants.flywheelAPort);
         flywheelB = new WPI_TalonFX(ShooterConstants.flywheelBPort);
         flywheelB.follow(flywheelA);
+        flywheelB.setInverted(InvertType.OpposeMaster);
 
         flywheelShots = new ArrayList<Double>();
+    }
+
+    public void manualShoot() {
+        flywheelA.set(TalonFXControlMode.PercentOutput, 0.75);
     }
 
     /** 
@@ -108,6 +114,6 @@ public class Shooter extends SubsystemBase {
     }
 
     public void halt() {
-        flywheelA.set(TalonFXControlMode.Velocity, 0.0);
+        flywheelA.set(TalonFXControlMode.PercentOutput, 0.0);
     }
 }
