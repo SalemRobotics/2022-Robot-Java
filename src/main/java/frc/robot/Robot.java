@@ -72,9 +72,9 @@ public class Robot extends TimedRobot {
     m_robotContainer.robotDrive.odometry.getPoseMeters().getY());
 
     SmartDashboard.putNumber("leftEncoder pulses", 
-    m_robotContainer.robotDrive.leftEncoder.getIntegratedSensorPosition());
+    m_robotContainer.robotDrive.leftFrontMotor.getSelectedSensorPosition());
     SmartDashboard.putNumber("rightEncoder pulse", 
-    m_robotContainer.robotDrive.rightEncoder.getIntegratedSensorPosition());
+    m_robotContainer.robotDrive.rightFrontMotor.getSelectedSensorPosition());
   }
 
   @Override

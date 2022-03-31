@@ -15,7 +15,7 @@ public final class Constants {
             public static final double trackWidthMeters = 0.635;
             public static final double maxSpeedMetersPerSecond = 3.0;
             public static final double maxAccelerationMetersPerSecondSq = 3.0;
-            public static final double encoderMetersFromPulses = ((1.0/2048.0)/(10 * 0.1016 * Math.PI));
+            public static final double encoderMetersFromPulses = ((1.0/2048.0)/(10 * 0.1016 * Math.PI))/10;
             public static final double metersPerSecondFromPulses = encoderMetersFromPulses * 10;
             public static final double ramseteB = 2;
             public static final double ramseteZeta = 0.7;

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.FollowerType;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.RemoteSensorSource;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
@@ -27,11 +28,9 @@ import frc.robot.Constants.DrivetrainConstants.DrivetrainAutoConstants;
 /** Drivetrain uses 4 TalonFX motors, using differntial drive or "tank" drive. */
 public class Drivetrain extends SubsystemBase {
 
-  WPI_TalonFX leftFrontMotor, leftRearMotor, rightFrontMotor, rightRearMotor;
+  public WPI_TalonFX leftFrontMotor, leftRearMotor, rightFrontMotor, rightRearMotor;
   TalonFXConfiguration leftConfig, rightConfig;
-  public TalonFXSensorCollection leftEncoder, rightEncoder;
   PigeonIMU gyro;
-  MotorControllerGroup leftMotors, rightMotors;
   DifferentialDrive difDrive;
   public DifferentialDriveOdometry odometry;
 
@@ -43,25 +42,27 @@ public class Drivetrain extends SubsystemBase {
     leftFrontMotor.setSensorPhase(false);
     leftRearMotor = new WPI_TalonFX(DrivetrainConstants.kLeftRearPort);
     leftRearMotor.setNeutralMode(NeutralMode.Coast);
+    leftRearMotor.follow(leftFrontMotor);
+    leftRearMotor.setInverted(InvertType.FollowMaster);
+    leftFrontMotor.setInverted(TalonFXInvertType.CounterClockwise);
 
-    leftMotors = new MotorControllerGroup(
-      leftFrontMotor, 
-      leftRearMotor
-    );
+    // leftMotors = new MotorControllerGroup(
+    //   leftFrontMotor, 
+    //   leftRearMotor
+    // );
 
     //right motors
     rightFrontMotor = new WPI_TalonFX(DrivetrainConstants.kRightFrontPort);
     rightFrontMotor.setNeutralMode(NeutralMode.Coast);
     rightRearMotor = new WPI_TalonFX(DrivetrainConstants.kRightRearPort);
     rightRearMotor.setNeutralMode(NeutralMode.Coast);
-
-    rightFrontMotor.setSensorPhase(true);
-
-    rightMotors = new MotorControllerGroup(
-      rightFrontMotor,
-      rightRearMotor
-    );
-    rightMotors.setInverted(true);
+    rightRearMotor.follow(rightFrontMotor);
+    rightRearMotor.setInverted(InvertType.FollowMaster);
+    // rightMotors = new MotorControllerGroup(
+    //   rightFrontMotor,
+    //   rightRearMotor
+    // );
+    rightFrontMotor.setInverted(TalonFXInvertType.Clockwise);
 
     // Create motor configs
     leftConfig = new TalonFXConfiguration();
@@ -87,7 +88,7 @@ public class Drivetrain extends SubsystemBase {
     leftConfig.slot1.allowableClosedloopError = 0;
 
     // Set differential drive
-    difDrive = new DifferentialDrive(leftMotors, rightMotors);
+    difDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
 
     // Create gyro and odometry
     odometry = new DifferentialDriveOdometry(getRotation2d());
@@ -114,8 +115,8 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void tankDriveVolts(double leftVolts, double rightVolts) {
-    leftMotors.set(leftVolts);
-    rightMotors.set(-rightVolts);
+    leftFrontMotor.set(leftVolts);
+    rightFrontMotor.set(-rightVolts);
     difDrive.feed();
   }
 
