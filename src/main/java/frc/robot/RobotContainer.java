@@ -9,9 +9,11 @@ import frc.robot.command_groups.ClimbDownGroup;
 import frc.robot.command_groups.ClimbUpGroup;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.Shoot;
+import frc.robot.commands.IndexIn;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Indexer;
 
 public class RobotContainer {
 
@@ -19,6 +21,7 @@ public class RobotContainer {
   
   private final Shooter shooter = new Shooter();
   public final Climber climber = new Climber();
+  private final Indexer indexer = new Indexer();
 
   private final XboxController driverController = new XboxController(XBConstants.drivePort);
   private final XboxController operatorController = new XboxController(XBConstants.opPort);
