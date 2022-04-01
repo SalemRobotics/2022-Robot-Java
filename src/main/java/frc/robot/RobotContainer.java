@@ -2,14 +2,17 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.XBConstants;
 import frc.robot.command_groups.ClimbBrakeGroup;
 import frc.robot.command_groups.ClimbDownGroup;
 import frc.robot.command_groups.ClimbUpGroup;
+import frc.robot.command_groups.IntakeGroup;
 import frc.robot.command_groups.ShootIndexGroup;
+import frc.robot.command_groups.StopIntakeGroup;
+import frc.robot.commands.Auto;
 import frc.robot.commands.DefaultDrive;
-import frc.robot.commands.IntakeIn;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Climber;
@@ -37,8 +40,13 @@ public class RobotContainer {
     );
   }
 
+  public Command getAutonomousCommand() {
+    return new Auto(robotDrive);
+  }
+
   private void configureButtonBindings() {
-    new JoystickButton(operatorController, Button.kRightBumper.value).whenHeld(new IntakeIn(intake));
+    new JoystickButton(operatorController, Button.kRightBumper.value).whenHeld(new IntakeGroup(intake, indexer, shooter));
+    new JoystickButton(operatorController, Button.kRightBumper.value).whenReleased(new StopIntakeGroup(intake, indexer));
     // Shooter button
     new JoystickButton(operatorController, Button.kX.value).whenHeld(new ShootIndexGroup(shooter, indexer));
     

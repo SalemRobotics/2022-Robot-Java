@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,15 +26,23 @@ public class Shooter extends SubsystemBase {
 
     public Shooter() {
         flywheelA = new WPI_TalonFX(ShooterConstants.flywheelAPort);
+
+        flywheelA.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
+        flywheelA.config_kF(0, 0);
+        flywheelA.config_kP(0, 0.1);
+        flywheelA.config_kI(0, .001);
+        flywheelA.config_kD(0, 5);
+
         flywheelB = new WPI_TalonFX(ShooterConstants.flywheelBPort);
         flywheelB.follow(flywheelA);
         flywheelB.setInverted(InvertType.OpposeMaster);
 
+
         flywheelShots = new ArrayList<Double>();
     }
 
-    public void manualShoot() {
-        flywheelA.set(TalonFXControlMode.PercentOutput, 0.5);
+    public void manualShoot(double speed) {
+        flywheelA.set(TalonFXControlMode.Velocity, speed);
         SmartDashboard.putNumber("pulese", flywheelA.getSelectedSensorVelocity());
     }
 

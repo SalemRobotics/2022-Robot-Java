@@ -32,13 +32,13 @@ public class Indexer extends SubsystemBase {
     }
 
     /** Sets motor at full speed */
-    public void indexIn() {
-        indexMotor.set(1.0);
+    public void indexIn(double speed) {
+        indexMotor.set(speed);
     }
 
     /** Sets motor in reverse at full speed */
-    public void indexOut() {
-        indexMotor.set(-1.0);
+    public void indexOut(double speed) {
+        indexMotor.set(speed);
     }
 
     /**

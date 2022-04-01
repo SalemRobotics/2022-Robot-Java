@@ -13,12 +13,12 @@ import frc.robot.subsystems.Shooter;
 public class ShootIndexGroup extends ParallelCommandGroup {
     public ShootIndexGroup(Shooter shooter, Indexer indexer) {
         addCommands(
-            new Shoot(shooter),
+            new Shoot(shooter, 7000),
 
             new SequentialCommandGroup(
                 new WaitUntilCommand(new CheckSpeed(shooter)),
 
-                new IndexIn(indexer)
+                new IndexIn(indexer, 1.0)
             )
         );
     }

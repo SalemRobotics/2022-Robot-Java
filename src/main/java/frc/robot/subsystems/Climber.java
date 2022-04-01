@@ -1,7 +1,9 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -22,7 +24,7 @@ public class Climber extends SubsystemBase {
         motorB = new WPI_TalonSRX(ClimberConstants.kMotorBPort);
         motorB.follow(motorA);
         motorB.setInverted(InvertType.OpposeMaster);
-
+        
         solenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, ClimberConstants.kForwardChannel, ClimberConstants.kReverseChannel);
 
         topSwitch = new DigitalInput(ClimberConstants.topSwitchPort);

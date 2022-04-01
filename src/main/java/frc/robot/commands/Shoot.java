@@ -5,15 +5,17 @@ import frc.robot.subsystems.Shooter;
 
 public class Shoot extends CommandBase {
     private final Shooter shooter;
-    public Shoot(Shooter subsystem) {
+    private final double speed;
+    public Shoot(Shooter subsystem, double speed) {
         shooter = subsystem;
+        this.speed = speed;
         addRequirements(shooter);
     }
 
     @Override
     public void execute() {
         // shooter.shoot(targetDistance); //TODO: add distance from limelight to goal from future vision subsytem
-        shooter.manualShoot();
+        shooter.manualShoot(speed);
     }
 
     @Override

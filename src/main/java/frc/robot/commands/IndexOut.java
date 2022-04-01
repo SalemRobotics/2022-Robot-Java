@@ -5,14 +5,20 @@ import frc.robot.subsystems.Indexer;
 
 public class IndexOut extends CommandBase {
     private final Indexer indexer;
-    public IndexOut(Indexer subsystem) {
+    private final double speed;
+    public IndexOut(Indexer subsystem, double speed) {
         indexer = subsystem;
+        this.speed = speed;
         addRequirements(indexer);
+    }
+    @Override
+    public void execute() {
+        indexer.indexOut(speed);
     }
 
     @Override
-    public void execute() {
-        indexer.indexOut();
+    public boolean isFinished() {
+        return false;
     }
 
     @Override
