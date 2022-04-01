@@ -18,10 +18,8 @@ public class Intake extends SubsystemBase {
     leftNeo = new CANSparkMax(IntakeConstants.leftSparkMaxID, MotorType.kBrushless);
     rightNeo = new CANSparkMax(IntakeConstants.rightSparkMaxID, MotorType.kBrushless);
 
-    leftSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, IntakeConstants.leftSolenoidChannelA, IntakeConstants.leftSolenoidChannelB);
-    rightSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, IntakeConstants.rightSolenoidChannelA, IntakeConstants.rightSolenoidChannelB);
-    leftSolenoid.set(Value.kReverse);
-    rightSolenoid.set(Value.kReverse);
+    leftSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, IntakeConstants.leftSolenoidChannelA, IntakeConstants.rightSolenoidChannelA);
+    leftSolenoid.set(Value.kForward);
   }
 
 /**
@@ -34,13 +32,11 @@ public class Intake extends SubsystemBase {
   }
 
   public void extend() {
-    leftSolenoid.set(Value.kForward);
-    rightSolenoid.set(Value.kForward);
+    leftSolenoid.set(Value.kReverse);
   }
 
   public void retract() {
-    leftSolenoid.set(Value.kReverse);
-    rightSolenoid.set(Value.kReverse);
+    leftSolenoid.set(Value.kForward);
   }
 
   public void halt() {
