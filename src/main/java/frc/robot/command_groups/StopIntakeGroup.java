@@ -1,9 +1,7 @@
 package frc.robot.command_groups;
 
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.IndexHalt;
 import frc.robot.commands.IndexOut;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;

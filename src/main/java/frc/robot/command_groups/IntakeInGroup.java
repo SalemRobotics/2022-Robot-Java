@@ -8,8 +8,8 @@ import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 
-public class IntakeGroup extends ParallelCommandGroup {
-    public IntakeGroup(Intake intake, Indexer indexer, Shooter shooter) {
+public class IntakeInGroup extends ParallelCommandGroup {
+    public IntakeInGroup(Intake intake, Indexer indexer, Shooter shooter) {
         addCommands(
             new IntakeIn(intake),
             new IndexIn(indexer, 0.5),

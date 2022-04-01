@@ -26,6 +26,7 @@ public final class Constants {
     public final class ShooterConstants {
         public static final int flywheelAPort = 8;
         public static final int flywheelBPort = 9;
+        public static final int flywheelSpeed = 10000;
     }
 
     public final class SpeedConstants {
