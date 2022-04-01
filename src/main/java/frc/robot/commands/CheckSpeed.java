@@ -17,6 +17,6 @@ public class CheckSpeed extends CommandBase implements BooleanSupplier {
 
     @Override
     public boolean getAsBoolean() {
-        return shooter.dumbCheckSpeed(14000);
+        return shooter.dumbCheckSpeed(13000);
     }
 }
