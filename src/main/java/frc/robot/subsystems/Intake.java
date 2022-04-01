@@ -42,5 +42,9 @@ public class Intake extends SubsystemBase {
   public void halt() {
     leftNeo.set(0.0);
     rightNeo.set(0.0);
+
   }
+
+  
+
 }

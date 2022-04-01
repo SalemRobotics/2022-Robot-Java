@@ -35,6 +35,15 @@ public class Drivetrain extends SubsystemBase {
   }
 
   /**
+   * Drives all motors at a set speed
+   * @param speed Speed to run motors at
+   */
+  public void tankDriveVolts(double speed) {
+    leftMotors.set(speed);
+    rightMotors.set(speed);
+  }
+
+  /**
    * Sets motors to use arcade drive
    * @param fwd Forward axis of drivetrain (Y axis)
    * @param rot Axis of rotation of drivetrain (X axis)

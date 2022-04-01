@@ -7,6 +7,7 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.Constants.SpeedConstants;
@@ -32,7 +33,8 @@ public class Shooter extends SubsystemBase {
     }
 
     public void manualShoot() {
-        flywheelA.set(TalonFXControlMode.PercentOutput, 0.50);
+        flywheelA.set(TalonFXControlMode.PercentOutput, 0.5);
+        SmartDashboard.putNumber("pulese", flywheelA.getSelectedSensorVelocity());
     }
 
     public boolean dumbCheckSpeed(int targetSpeed) {

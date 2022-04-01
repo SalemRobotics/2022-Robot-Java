@@ -14,7 +14,7 @@ public class ClimbDown extends CommandBase{
     // Runs motors in reverse at full speed.
     @Override
     public void execute() {
-        climber.releaseBrake();
+        // climber.releaseBrake();
         climber.climb(-1.0, false);
     }
 
