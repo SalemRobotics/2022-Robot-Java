@@ -48,7 +48,7 @@ public class RobotContainer {
 
     aChooser.setDefaultOption("Shoot and Taxi", new ShootAutoGroup(shooter, robotDrive, indexer));
     aChooser.addOption("Shoot-taxi and intake", new ShootIntakeAuto(shooter, robotDrive, indexer, intake));
-    aChooser.addOption("Taxi", new Auto(robotDrive));
+    aChooser.addOption("Taxi", new Auto(robotDrive, 0.3));
     SmartDashboard.putData(aChooser);
   }
 
