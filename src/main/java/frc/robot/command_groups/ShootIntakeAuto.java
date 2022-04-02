@@ -13,12 +13,13 @@ public class ShootIntakeAuto extends SequentialCommandGroup {
     public ShootIntakeAuto(Shooter shooter, Drivetrain drivetrain, Indexer index, Intake intake) {
         addCommands(
             new ParallelRaceGroup(
+                new IntakeInGroup(intake, index, shooter),
+                new Auto(drivetrain, 0.3, 1.0)
+            ),
+            new Auto(drivetrain, -0.3),
+            new ParallelRaceGroup(
                 new ShootIndexGroup(shooter, index),
                 new WaitCommand(2)
-            ),
-            new ParallelRaceGroup(
-                new IntakeInGroup(intake, index, shooter),
-                new Auto(drivetrain)
             )
         );
     }

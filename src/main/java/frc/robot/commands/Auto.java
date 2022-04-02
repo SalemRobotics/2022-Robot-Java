@@ -7,9 +7,21 @@ import frc.robot.subsystems.Drivetrain;
 public class Auto extends CommandBase {
     private final Drivetrain drivetrain;
     private final Timer timer;
-    public Auto(Drivetrain subsystem) {
+    private final double speed;
+    private final double time;
+    public Auto(Drivetrain subsystem, double speed) {
         drivetrain = subsystem;
         timer = new Timer();
+        this.speed = speed;
+        this.time = 3.0;
+        addRequirements(drivetrain);
+    }
+
+    public Auto(Drivetrain subsystem, double speed, double time) {
+        drivetrain = subsystem;
+        timer = new Timer();
+        this.speed = speed;
+        this.time = time;
         addRequirements(drivetrain);
     }
 
@@ -21,12 +33,12 @@ public class Auto extends CommandBase {
 
     @Override
     public void execute() {
-        drivetrain.tankDriveVolts(0.3);
+        drivetrain.tankDriveVolts(speed);
     }
 
     @Override
     public boolean isFinished() {
-        if (timer.hasElapsed(3.0)) return true;
+        if (timer.hasElapsed(time)) return true;
         return false;
     }
 }
