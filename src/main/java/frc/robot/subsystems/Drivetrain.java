@@ -6,6 +6,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -84,6 +85,7 @@ public class Drivetrain extends SubsystemBase {
     leftConfig.slot1.integralZone = DriveTrainPIDConstants.Iz;
     leftConfig.slot1.closedLoopPeakOutput = DriveTrainPIDConstants.peak;
     leftConfig.slot1.allowableClosedloopError = 0;
+    // leftFrontMotor.configAllSettings(leftConfig);
 
     // Set differential drive
     difDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
@@ -101,6 +103,8 @@ public class Drivetrain extends SubsystemBase {
         leftFrontMotor.getSelectedSensorPosition() * DrivetrainAutoConstants.encoderMetersFromPulses, 
         rightFrontMotor.getSelectedSensorPosition() * DrivetrainAutoConstants.encoderMetersFromPulses
       );
+      SmartDashboard.putNumber("LeftEncoder", leftFrontMotor.getSelectedSensorPosition() * DrivetrainAutoConstants.encoderMetersFromPulses);
+      SmartDashboard.putNumber("RightEncoder", rightFrontMotor.getSelectedSensorPosition() * DrivetrainAutoConstants.encoderMetersFromPulses);
   }
 
   /**
@@ -114,7 +118,7 @@ public class Drivetrain extends SubsystemBase {
 
   public void tankDriveVolts(double leftVolts, double rightVolts) {
     leftFrontMotor.set(leftVolts);
-    rightFrontMotor.set(-rightVolts);
+    rightFrontMotor.set(rightVolts);
     difDrive.feed();
   }
 
