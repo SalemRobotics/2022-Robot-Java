@@ -9,26 +9,21 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.DemandType;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.FollowerType;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.RemoteSensorSource;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
-import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 
 import frc.robot.Constants.DrivetrainConstants;
-import frc.robot.Constants.DrivetrainConstants.DriveTrainPIDConstants;
 import frc.robot.Constants.DrivetrainConstants.DrivetrainAutoConstants;
 
 /** Drivetrain uses 4 TalonFX motors, using differntial drive or "tank" drive. */
 public class Drivetrain extends SubsystemBase {
 
   public WPI_TalonFX leftFrontMotor, leftRearMotor, rightFrontMotor, rightRearMotor;
-  TalonFXConfiguration leftConfig, rightConfig;
   PigeonIMU gyro;
   DifferentialDrive difDrive;
   public DifferentialDriveOdometry odometry;
@@ -63,29 +58,7 @@ public class Drivetrain extends SubsystemBase {
     // );
     rightFrontMotor.setInverted(TalonFXInvertType.Clockwise);
 
-    // Create motor configs
-    leftConfig = new TalonFXConfiguration();
-    rightConfig = new TalonFXConfiguration();
     gyro = new PigeonIMU(1);
-
-    // set remote sensor source
-    leftConfig.remoteFilter0.remoteSensorSource = RemoteSensorSource.GadgeteerPigeon_Yaw;
-    leftConfig.remoteFilter0.remoteSensorDeviceID = gyro.getDeviceID();
-
-    // set PID sensor
-    leftConfig.auxiliaryPID.selectedFeedbackSensor = FeedbackDevice.RemoteSensor0;
-    leftConfig.auxiliaryPID.selectedFeedbackCoefficient = 
-        DriveTrainPIDConstants.turnTravelUnitsPerRotation / DriveTrainPIDConstants.pigeonUnitsPerRotation;
-    
-    // PID config
-    leftConfig.slot1.kP = DriveTrainPIDConstants.P;
-    leftConfig.slot1.kI = DriveTrainPIDConstants.I;
-    leftConfig.slot1.kD = DriveTrainPIDConstants.D;
-    leftConfig.slot1.kF = DriveTrainPIDConstants.F;
-    leftConfig.slot1.integralZone = DriveTrainPIDConstants.Iz;
-    leftConfig.slot1.closedLoopPeakOutput = DriveTrainPIDConstants.peak;
-    leftConfig.slot1.allowableClosedloopError = 0;
-    // leftFrontMotor.configAllSettings(leftConfig);
 
     // Set differential drive
     difDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);

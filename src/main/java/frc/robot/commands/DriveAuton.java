@@ -52,7 +52,7 @@ public class DriveAuton {
         .setReversed(false);
     
         trajectory = TrajectoryGenerator.generateTrajectory(
-            List.of(new Pose2d(0, 0, new Rotation2d(0)), new Pose2d(20, 0, new Rotation2d(0))),
+            List.of(new Pose2d(0, 0, new Rotation2d(0)), new Pose2d(2, 0, new Rotation2d(0))),
             config
         );
 
@@ -63,8 +63,8 @@ public class DriveAuton {
             feedforward,
             driveKinematics, 
             drive::getWheelSpeeds, 
-            new PIDController(DrivetrainAutoConstants.kpDriveVelocity, 0, 0), 
-            new PIDController(DrivetrainAutoConstants.kpDriveVelocity, 0, 0), 
+            new PIDController(DrivetrainAutoConstants.kP, DrivetrainAutoConstants.kI, DrivetrainAutoConstants.kD), 
+            new PIDController(DrivetrainAutoConstants.kP, DrivetrainAutoConstants.kI, DrivetrainAutoConstants.kD), 
             drive::tankDriveVolts, 
             drive
         );
