@@ -4,9 +4,18 @@ import frc.robot.subsystems.Intake;
 
 public class IntakeIn extends CommandBase{
     private final Intake intake;
+    private final double speed;
 
     public IntakeIn(Intake subsystem) {
         intake = subsystem;
+        this.speed = 0.75;
+
+        addRequirements(intake);
+    }
+
+    public IntakeIn(Intake subsystem, double speed) {
+        intake = subsystem;
+        this.speed = speed;
 
         addRequirements(intake);
     }
@@ -14,7 +23,7 @@ public class IntakeIn extends CommandBase{
     @Override
     public void execute() {
         intake.extend();
-        intake.collect(1.0);
+        intake.collect(speed);
     }
 
     @Override

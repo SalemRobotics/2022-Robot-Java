@@ -10,7 +10,7 @@ public class StopIntakeGroup extends ParallelRaceGroup {
     public StopIntakeGroup(Intake intake, Indexer indexer) {
         addCommands(
             new IndexOut(indexer, -0.5),
-            new WaitCommand(0.25)
+            new WaitCommand(0.5)
         );
     }
 }

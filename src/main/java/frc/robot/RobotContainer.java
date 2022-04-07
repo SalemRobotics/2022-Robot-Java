@@ -43,7 +43,7 @@ public class RobotContainer {
 
     // Sets default command for drivetrain
     robotDrive.setDefaultCommand(
-      new DefaultDrive(robotDrive, driverController::getLeftY, driverController::getRightX)
+      new DefaultDrive(robotDrive, driverController::getLeftY, driverController::getRightX, false)
     );
 
     aChooser.setDefaultOption("Shoot and Taxi", new ShootAutoGroup(shooter, robotDrive, indexer));
@@ -57,6 +57,10 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
+    // Switch drive direction
+    new JoystickButton(driverController, Button.kA.value).toggleWhenPressed(
+      new DefaultDrive(robotDrive, driverController::getLeftY, driverController::getRightX, true));
+
     // Intake in
     new JoystickButton(operatorController, Button.kRightBumper.value).whenHeld(new IntakeInGroup(intake, indexer, shooter));
     new JoystickButton(operatorController, Button.kRightBumper.value).whenReleased(new StopIntakeGroup(intake, indexer));

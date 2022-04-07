@@ -13,7 +13,7 @@ public class IntakeInGroup extends ParallelCommandGroup {
         addCommands(
             new IntakeIn(intake),
             new IndexIn(indexer, 0.5),
-            new Shoot(shooter, -1000)
+            new Shoot(shooter, -3000)
         );
     }
 }

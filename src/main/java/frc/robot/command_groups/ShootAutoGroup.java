@@ -15,7 +15,7 @@ public class ShootAutoGroup extends SequentialCommandGroup {
                 new ShootIndexGroup(shooter, index),
                 new WaitCommand(2)
             ),
-            new Auto(drivetrain, 0.3)
+            new Auto(drivetrain, 0.3, 2.0)
         );
     }
 }

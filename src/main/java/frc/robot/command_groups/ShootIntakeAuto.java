@@ -14,9 +14,9 @@ public class ShootIntakeAuto extends SequentialCommandGroup {
         addCommands(
             new ParallelRaceGroup(
                 new IntakeInGroup(intake, index, shooter),
-                new Auto(drivetrain, 0.3, 1.0)
+                new Auto(drivetrain, 0.3, 2.0)
             ),
-            new Auto(drivetrain, -0.3),
+            new Auto(drivetrain, -0.3, 3.5),
             new ParallelRaceGroup(
                 new ShootIndexGroup(shooter, index),
                 new WaitCommand(2)

@@ -19,7 +19,7 @@ public class ShootIndexGroup extends ParallelCommandGroup {
             new SequentialCommandGroup(
                 new WaitUntilCommand(new CheckSpeed(shooter)),
 
-                new IndexIn(indexer, 1.0)
+                new IndexIn(indexer, 0.69420)
             )
         );
     }
