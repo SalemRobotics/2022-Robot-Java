@@ -8,7 +8,7 @@ public class IntakeIn extends CommandBase{
 
     public IntakeIn(Intake subsystem) {
         intake = subsystem;
-        this.speed = 0.75;
+        this.speed = 1.0;
 
         addRequirements(intake);
     }

@@ -29,9 +29,9 @@ public class Shooter extends SubsystemBase {
 
         flywheelA.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
         flywheelA.config_kF(0, 0);
-        flywheelA.config_kP(0, 0.1);
+        flywheelA.config_kP(0, 0.25);
         flywheelA.config_kI(0, .001);
-        flywheelA.config_kD(0, 5);
+        flywheelA.config_kD(0, 10);
 
         flywheelB = new WPI_TalonFX(ShooterConstants.flywheelBPort);
         flywheelB.follow(flywheelA);
