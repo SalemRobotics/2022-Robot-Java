@@ -32,9 +32,10 @@ public class DriveAuton {
 
 
         feedforward = new SimpleMotorFeedforward(
-            DrivetrainAutoConstants.ksVolts, 
-            DrivetrainAutoConstants.kvVoltSecondsPerMeter, 
-            DrivetrainAutoConstants.kaVoltSecondsSquaredPerMeter
+            // DrivetrainAutoConstants.ksVolts, 
+            // DrivetrainAutoConstants.kvVoltSecondsPerMeter, 
+            // DrivetrainAutoConstants.kaVoltSecondsSquaredPerMeter
+            0.0, 0.0, 0.0
         );
 
         voltageConstraint = new DifferentialDriveVoltageConstraint(
@@ -52,7 +53,7 @@ public class DriveAuton {
         .setReversed(false);
     
         trajectory = TrajectoryGenerator.generateTrajectory(
-            List.of(new Pose2d(0, 0, new Rotation2d(0)), new Pose2d(2, 0, new Rotation2d(0))),
+            List.of(new Pose2d(0, 0, new Rotation2d()), new Pose2d(2, 0, new Rotation2d())),
             config
         );
 
