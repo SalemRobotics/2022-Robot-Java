@@ -63,6 +63,8 @@ public class Drivetrain extends SubsystemBase {
     // Set differential drive
     difDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
 
+    zeroHeading();
+
     // Create gyro and odometry
     odometry = new DifferentialDriveOdometry(getRotation2d());
 
@@ -78,6 +80,7 @@ public class Drivetrain extends SubsystemBase {
       );
       SmartDashboard.putNumber("LeftEncoder", leftFrontMotor.getSelectedSensorPosition() * DrivetrainAutoConstants.encoderMetersFromPulses);
       SmartDashboard.putNumber("RightEncoder", rightFrontMotor.getSelectedSensorPosition() * DrivetrainAutoConstants.encoderMetersFromPulses);
+      SmartDashboard.putNumber("Rotation", odometry.getPoseMeters().getRotation().getDegrees());
   }
 
   /**
@@ -108,9 +111,9 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public Rotation2d getRotation2d() {
-    double[] ypr = new double[3];
-    gyro.getYawPitchRoll(ypr);
-    return Rotation2d.fromDegrees(ypr[0] * -1);
+    double yaw = gyro.getYaw();
+    SmartDashboard.putNumber("Yaw", yaw);
+    return Rotation2d.fromDegrees(Math.IEEEremainder(yaw, 360.0d) * -1.0d);
   }
 
   public void resetEncoders() {
@@ -140,7 +143,7 @@ public class Drivetrain extends SubsystemBase {
 
   /** Zeroes the gyro's heading */
   public void zeroHeading() {
-    gyro.setFusedHeading(0.0);
+    gyro.setYaw(0.0);
   }  
 
   public double getTurnRate() {

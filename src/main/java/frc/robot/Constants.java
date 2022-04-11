@@ -19,10 +19,10 @@ public final class Constants {
             public static final double metersPerSecondFromPulses = encoderMetersFromPulses * 10;
             public static final double ramseteB = 2;
             public static final double ramseteZeta = 0.7;
-            public static final double kP = 1.5;
+            public static final double kP = 0.7;
             // public static final double kI = 0.418;
-            public static final double kI = 0.0;
-            public static final double kD = 0.0;
+            public static final double kI = 0.6;
+            public static final double kD = 0.001;
         }
 
         public final class DriveTrainPIDConstants {

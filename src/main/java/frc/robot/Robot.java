@@ -56,7 +56,17 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    SmartDashboard.putNumber("Odometry X", 
+    m_robotContainer.robotDrive.odometry.getPoseMeters().getX());
+    SmartDashboard.putNumber("Odometry Y", 
+    m_robotContainer.robotDrive.odometry.getPoseMeters().getY());
+
+    SmartDashboard.putNumber("leftEncoder pulses", 
+    m_robotContainer.robotDrive.leftFrontMotor.getSelectedSensorPosition());
+    SmartDashboard.putNumber("rightEncoder pulse", 
+    m_robotContainer.robotDrive.rightFrontMotor.getSelectedSensorPosition());
+  }
 
   @Override
   public void teleopInit() {
