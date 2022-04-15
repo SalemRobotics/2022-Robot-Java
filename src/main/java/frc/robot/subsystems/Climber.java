@@ -24,6 +24,7 @@ public class Climber extends SubsystemBase {
         motorB.setInverted(InvertType.OpposeMaster);
         
         solenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, ClimberConstants.kForwardChannel, ClimberConstants.kReverseChannel);
+        solenoid.set(Value.kForward);
 
         topSwitch = new DigitalInput(ClimberConstants.topSwitchPort);
         bottomSwitch = new DigitalInput(ClimberConstants.bottomSwitchPort);
@@ -35,10 +36,10 @@ public class Climber extends SubsystemBase {
      * @param currentLimit Whether currentLimit is enabled or disabled
      */
     public void climb(double speed, boolean currentLimit) {
-        motorA.configPeakCurrentLimit(50, 500);
-        motorB.configPeakCurrentLimit(50, 500);
-        motorA.enableCurrentLimit(currentLimit);
-        motorB.enableCurrentLimit(currentLimit);
+        // motorA.configPeakCurrentLimit(50, 500);
+        // motorB.configPeakCurrentLimit(50, 500);
+        // motorA.enableCurrentLimit(currentLimit);
+        // motorB.enableCurrentLimit(currentLimit);
         motorA.set(TalonSRXControlMode.PercentOutput, speed);
     }
 

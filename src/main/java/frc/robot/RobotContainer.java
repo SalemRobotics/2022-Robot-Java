@@ -71,10 +71,9 @@ public class RobotContainer {
     // Shooter button
     new JoystickButton(operatorController, Button.kX.value).whenHeld(new ShootIndexGroup(shooter, indexer));
     
-    // Climber button configs TODO: please, let's make this differently i hate this
-    new JoystickButton(operatorController, Button.kA.value).whenPressed(new ClimbUpGroup(climber));
-    new JoystickButton(operatorController, Button.kA.value).whenReleased(new ClimbBrakeGroup(climber));
-    new JoystickButton(operatorController, Button.kB.value).whenPressed(new ClimbDownGroup(climber));
-    new JoystickButton(operatorController, Button.kB.value).whenReleased(new ClimbBrakeGroup(climber));
+    // Climber button configs 
+    new JoystickButton(operatorController, Button.kA.value).whenHeld(new ClimbUpGroup(climber));
+    new JoystickButton(operatorController, Button.kB.value).whenHeld(new ClimbDownGroup(climber));
+    new JoystickButton(operatorController, Button.kY.value).toggleWhenPressed(new ClimbBrakeGroup(climber));
   }
 }
