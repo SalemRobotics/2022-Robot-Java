@@ -13,16 +13,16 @@ public final class Constants {
             public static final double kvVoltSecondsPerMeter = 3.3683;
             public static final double kaVoltSecondsSquaredPerMeter = 0.26098;
             public static final double trackWidthMeters = 0.635;
-            public static final double maxSpeedMetersPerSecond = 3.0;
-            public static final double maxAccelerationMetersPerSecondSq = 3.0;
+            public static final double maxSpeedMetersPerSecond = 1.5;
+            public static final double maxAccelerationMetersPerSecondSq = 0.5;
             public static final double encoderMetersFromPulses = ((1.0/2048.0)/(10 * 0.1016 * Math.PI))/10;
             public static final double metersPerSecondFromPulses = encoderMetersFromPulses * 10;
             public static final double ramseteB = 2;
             public static final double ramseteZeta = 0.7;
-            public static final double kP = 0.7;
+            public static final double kP = 0.0;
             // public static final double kI = 0.418;
-            public static final double kI = 0.6;
-            public static final double kD = 0.001;
+            public static final double kI = 0.0;
+            public static final double kD = 0.0;
         }
 
         public final class DriveTrainPIDConstants {

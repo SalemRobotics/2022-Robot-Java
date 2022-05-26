@@ -36,7 +36,7 @@ public class DriveAuton {
             // DrivetrainAutoConstants.ksVolts, 
             // DrivetrainAutoConstants.kvVoltSecondsPerMeter, 
             // DrivetrainAutoConstants.kaVoltSecondsSquaredPerMeter
-            0.0, 0.0, 0.0
+            0.25, 0.1, 0.0
         );
 
         voltageConstraint = new DifferentialDriveVoltageConstraint(

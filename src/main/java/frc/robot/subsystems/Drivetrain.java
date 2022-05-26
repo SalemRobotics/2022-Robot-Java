@@ -113,7 +113,7 @@ public class Drivetrain extends SubsystemBase {
   public Rotation2d getRotation2d() {
     double yaw = gyro.getYaw();
     SmartDashboard.putNumber("Yaw", yaw);
-    return Rotation2d.fromDegrees(Math.IEEEremainder(yaw, 360.0d) * -1.0d);
+    return Rotation2d.fromDegrees(Math.IEEEremainder(yaw, 360.0d));
   }
 
   public void resetEncoders() {
