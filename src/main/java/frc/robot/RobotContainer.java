@@ -7,9 +7,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.XBConstants;
-import frc.robot.command_groups.ClimbBrakeGroup;
-import frc.robot.command_groups.ClimbDownGroup;
-import frc.robot.command_groups.ClimbUpGroup;
 import frc.robot.command_groups.IntakeInGroup;
 import frc.robot.command_groups.IntakeOutGroup;
 import frc.robot.command_groups.ShootAutoGroup;
@@ -17,10 +14,12 @@ import frc.robot.command_groups.ShootIndexGroup;
 import frc.robot.command_groups.ShootIntakeAuto;
 import frc.robot.command_groups.StopIntakeGroup;
 import frc.robot.commands.Auto;
+import frc.robot.commands.ClimberSpool;
+import frc.robot.commands.ClimberUnspool;
 import frc.robot.commands.DefaultDrive;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Indexer;
 
@@ -30,8 +29,8 @@ public class RobotContainer {
   private final Intake intake = new Intake();
   
   private final Shooter shooter = new Shooter();
-  private final Climber climber = new Climber();
   private final Indexer indexer = new Indexer();
+  public final Climber climber = new Climber();
 
   private final SendableChooser<Command> aChooser = new SendableChooser<>();
 
@@ -72,8 +71,8 @@ public class RobotContainer {
     new JoystickButton(operatorController, Button.kX.value).whenHeld(new ShootIndexGroup(shooter, indexer));
     
     // Climber button configs 
-    new JoystickButton(operatorController, Button.kA.value).whenHeld(new ClimbUpGroup(climber));
-    new JoystickButton(operatorController, Button.kB.value).whenHeld(new ClimbDownGroup(climber));
-    new JoystickButton(operatorController, Button.kY.value).toggleWhenPressed(new ClimbBrakeGroup(climber));
+    new JoystickButton(operatorController, Button.kY.value).whenHeld(new ClimberUnspool(climber));
+    new JoystickButton(operatorController, Button.kB.value).whenHeld(new ClimberSpool(climber));
   }
 }
+
