@@ -57,7 +57,7 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     // Switch drive direction
-    new JoystickButton(driverController, Button.kA.value).toggleWhenPressed(
+    new JoystickButton(driverController, Button.kB.value).toggleWhenPressed(
       new DefaultDrive(robotDrive, driverController::getLeftY, driverController::getRightX, true));
 
     // Intake in
